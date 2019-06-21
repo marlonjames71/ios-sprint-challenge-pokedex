@@ -26,7 +26,7 @@ class APIController {
 	private let baseUrl = URL(string: "https://pokeapi.co/api/v2")
 	
 	
-	// Fetch Pokemon Name
+	// Fetch Pokemon
 	func fetchPokemon(pokemonName: String, completion: @escaping () -> ()) {
 		let pokemonUrl = baseUrl?.appendingPathComponent(pokemonName)
 		guard let pokeUrl = pokemonUrl else { return }

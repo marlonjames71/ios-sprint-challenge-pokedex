@@ -10,6 +10,7 @@ import UIKit
 
 class PokemonDetailViewController: UIViewController {
 
+	var pokedexTableViewController: PokedexTableViewController?
 	
 	@IBOutlet var nameLabel: UILabel!
 	@IBOutlet var imageView: UIImageView!

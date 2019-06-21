@@ -226,7 +226,11 @@
                         <viewLayoutGuide key="safeArea" id="rvZ-xr-xHe"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search Pokemon" id="pFC-rD-no3">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="bTj-Op-p4f"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="bTj-Op-p4f">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="KQn-i0-ULh" id="pD1-8A-Ebw"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="abilityLabel" destination="ucS-E3-Wxr" id="nl8-Q2-Pfg"/>

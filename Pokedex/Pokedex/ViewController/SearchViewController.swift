@@ -10,6 +10,9 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+	private let apiController = APIController()
+	var pokemon: [Pokemon] = []
+	
 	@IBOutlet var searchBar: UISearchBar!
 	@IBOutlet var nameLabel: UILabel!
 	@IBOutlet var imageView: UIImageView!
@@ -24,7 +27,22 @@ class SearchViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
+	
+	
+	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+		
+	}
+	
+	
+	func searchBarButtonSearchButtonClicked(_ sender: UISearchBar) {
+		guard let searchTerm = searchBar.text else { return }
+		apiController.fetchPokemon(pokemonName: searchTerm) {
+			DispatchQueue.main.async {
+//				nameLabel.text = 
+			}
+		}
+	}
+	
 
     /*
     // MARK: - Navigation
