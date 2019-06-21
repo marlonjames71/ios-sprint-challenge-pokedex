@@ -57,10 +57,10 @@
             </objects>
             <point key="canvasLocation" x="858" y="127"/>
         </scene>
-        <!--View Controller-->
+        <!--Pokemon Detail View Controller-->
         <scene sceneID="iQs-pG-dcF">
             <objects>
-                <viewController id="bXE-ZN-xTc" sceneMemberID="viewController">
+                <viewController id="bXE-ZN-xTc" customClass="PokemonDetailViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fa6-My-bSD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,6 +93,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7et-uf-Td7">
                                 <rect key="frame" x="100" y="738.5" width="214" height="30"/>
                                 <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="bXE-ZN-xTc" eventType="touchUpInside" id="Zev-tZ-ccM"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="r22-Sp-lnf">
                                 <rect key="frame" x="30" y="631" width="354" height="77.5"/>
@@ -133,6 +136,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="geM-el-2ob"/>
                     </view>
+                    <connections>
+                        <outlet property="abilityLabel" destination="ff4-Xn-5pb" id="b5K-Lp-Xzv"/>
+                        <outlet property="idLabel" destination="z5j-Go-dPm" id="5LR-7r-Z1C"/>
+                        <outlet property="imageView" destination="yzK-Lp-jOn" id="xCA-PV-Wg1"/>
+                        <outlet property="nameLabel" destination="gk6-9F-q6X" id="uwX-5z-IhI"/>
+                        <outlet property="typeLabel" destination="GAB-wl-ckc" id="6lK-ui-cam"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfX-Tv-ZyV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -249,6 +259,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="JAH-tv-3FQ">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.88473809400000003" green="1" blue="0.45247711909999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

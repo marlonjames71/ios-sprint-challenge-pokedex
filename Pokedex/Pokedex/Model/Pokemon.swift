@@ -16,3 +16,7 @@ struct Pokemon: Codable {
 	let ability: String
 	let imageURL: String
 }
+
+struct PokemonSearch: Decodable {
+	let results: [Pokemon]
+}

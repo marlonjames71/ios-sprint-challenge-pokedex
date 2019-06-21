@@ -10,13 +10,26 @@ import UIKit
 
 class PokemonDetailViewController: UIViewController {
 
+	
+	@IBOutlet var nameLabel: UILabel!
+	@IBOutlet var imageView: UIImageView!
+	@IBOutlet var idLabel: UILabel!
+	@IBOutlet var abilityLabel: UILabel!
+	@IBOutlet var typeLabel: UILabel!
+	
+	
+	
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
 
+	@IBAction func deleteButtonTapped(_ sender: UIButton) {
+	}
+	
+	
     /*
     // MARK: - Navigation
 
