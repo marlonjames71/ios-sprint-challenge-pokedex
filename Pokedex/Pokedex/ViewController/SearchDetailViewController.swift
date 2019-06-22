@@ -1,48 +1,50 @@
 //
-//  SearchViewController.swift
+//  SearchDetailViewController.swift
 //  Pokedex
 //
-//  Created by Marlon Raskin on 6/21/19.
+//  Created by Marlon Raskin on 6/22/19.
 //  Copyright © 2019 Marlon Raskin. All rights reserved.
 //
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchDetailViewController: UIViewController {
 
-	private let apiController = APIController()
-	var pokemon: [Pokemon] = []
-	
 	@IBOutlet var searchBar: UISearchBar!
-	@IBOutlet var nameLabel: UILabel!
+	@IBOutlet var pokemonNameLabel: UILabel!
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var idLabel: UILabel!
 	@IBOutlet var abilityLabel: UILabel!
 	@IBOutlet var typeLabel: UILabel!
+	@IBOutlet var saveButton: UIBarButtonItem!
+	
+	var apiController: APIController?
+	var pokemon: Pokemon?
+	
+	
 	
 	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 	
 	
+	
+	
 	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-		
 	}
 	
+	@IBAction func deleteButtonTapped(_ sender: UIButton) {
+	}
 	
 	func searchBarButtonSearchButtonClicked(_ sender: UISearchBar) {
-		guard let searchTerm = searchBar.text else { return }
-		apiController.fetchPokemon(pokemonName: searchTerm) {
-			DispatchQueue.main.async {
-//				nameLabel.text = 
-			}
+		guard let searchTerm = searchBar.text,
+			let apiController = apiController else { return }
+		apiController.fetchPokemon(pokemonName: searchTerm) { (pokemonObject) in
+	
 		}
 	}
-	
 
     /*
     // MARK: - Navigation

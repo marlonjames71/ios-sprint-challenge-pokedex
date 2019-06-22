@@ -23,11 +23,10 @@ enum NetworkError: Error {
 class APIController {
 	
 	var pokemon: [Pokemon] = []
-	private let baseUrl = URL(string: "https://pokeapi.co/api/v2")
-	
+	private let baseUrl = URL(string: "https://pokeapi.co/api/v2/pokemon")
 	
 	// Fetch Pokemon
-	func fetchPokemon(pokemonName: String, completion: @escaping () -> ()) {
+	func fetchPokemon(pokemonName: String, completion: @escaping (Pokemon?) -> ()) {
 		let pokemonUrl = baseUrl?.appendingPathComponent(pokemonName)
 		guard let pokeUrl = pokemonUrl else { return }
 		var request = URLRequest(url: pokeUrl)
@@ -44,14 +43,12 @@ class APIController {
 				return
 			}
 			
-			let jsonDecoder = JSONDecoder()
 			do {
-				let pokemonSearch = try jsonDecoder.decode(PokemonSearch.self, from: data)
-				self.pokemon = pokemonSearch.results
+				let pokemonSearch = try JSONDecoder().decode(Pokemon.self, from: data)
+				completion(pokemonSearch)
 			} catch {
 				print("Unable to decode data into object of type [Pokemon]: \(error)")
 			}
-			completion()
 		}.resume()
 	}
 	

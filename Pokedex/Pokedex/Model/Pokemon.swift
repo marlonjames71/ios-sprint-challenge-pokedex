@@ -11,10 +11,30 @@ import Foundation
 
 struct Pokemon: Codable {
 	let id: Int
+	let name: Species
+	let type: Types
+	let ability: Abilities
+}
+
+
+struct Abilities: Codable {
+	let abilities: [Ability]
+}
+
+struct Species: Codable {
 	let name: String
-	let type: String
-	let ability: String
-	let imageURL: String
+}
+
+struct Ability: Codable {
+	let name: String
+}
+
+struct Types: Codable {
+	let types: [Type]
+}
+
+struct Type: Codable {
+	let name: String
 }
 
 struct PokemonSearch: Decodable {
