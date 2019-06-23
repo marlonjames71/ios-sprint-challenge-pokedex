@@ -18,19 +18,18 @@ class SearchDetailViewController: UIViewController {
 	@IBOutlet var typeLabel: UILabel!
 	@IBOutlet var saveButton: UIBarButtonItem!
 	
-	var apiController: APIController?
+	var apiController: APIController? {
+		didSet {
+			updateViews()
+		}
+	}
+	
 	var pokemon: Pokemon?
-	
-	
-	
-	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		searchBar.delegate = self
     }
-	
-	
-	
 	
 	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
 	}
@@ -38,22 +37,27 @@ class SearchDetailViewController: UIViewController {
 	@IBAction func deleteButtonTapped(_ sender: UIButton) {
 	}
 	
-	func searchBarButtonSearchButtonClicked(_ sender: UISearchBar) {
-		guard let searchTerm = searchBar.text,
-			let apiController = apiController else { return }
-		apiController.fetchPokemon(pokemonName: searchTerm) { (pokemonObject) in
 	
-		}
+	func updateViews() {
+		guard let apiController = self.apiController else { return }
+		pokemonNameLabel.text = pokemon?.name
 	}
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+extension SearchDetailViewController: UISearchBarDelegate {
+	func searchBarSearchButtonClicked(_ sender: UISearchBar) {
+		guard let searchTerm = searchBar.text,
+			let apiController = apiController else { return }
+		apiController.fetchPokemon(pokemonName: searchTerm) { (pokemonObject, error) in
+			if let error = error {
+				print("Error searching pokemon: \(error)")
+				return
+			}
+			guard let pokeObject = pokemonObject else { return }
+			DispatchQueue.main.async {
+				self.updateViews()
+			}
+		}
+	}
 }

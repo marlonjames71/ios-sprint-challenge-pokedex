@@ -26,7 +26,7 @@ class APIController {
 	private let baseUrl = URL(string: "https://pokeapi.co/api/v2/pokemon")
 	
 	// Fetch Pokemon
-	func fetchPokemon(pokemonName: String, completion: @escaping (Pokemon?) -> ()) {
+	func fetchPokemon(pokemonName: String, completion: @escaping (Pokemon?, Error?) -> Void) {
 		let pokemonUrl = baseUrl?.appendingPathComponent(pokemonName)
 		guard let pokeUrl = pokemonUrl else { return }
 		var request = URLRequest(url: pokeUrl)
@@ -45,7 +45,7 @@ class APIController {
 			
 			do {
 				let pokemonSearch = try JSONDecoder().decode(Pokemon.self, from: data)
-				completion(pokemonSearch)
+				completion(pokemonSearch, nil)
 			} catch {
 				print("Unable to decode data into object of type [Pokemon]: \(error)")
 			}
