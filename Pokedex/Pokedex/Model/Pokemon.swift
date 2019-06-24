@@ -7,27 +7,33 @@
 //
 
 import Foundation
-
+import UIKit
 
 struct Pokemon: Codable {
 	let name: String
-//	let type: Types
-//	let ability: Abilities
-//	let id: Int
+	let types: [TypeInfo]
+	let abilities: [AbilityInfo]
+	let id: Int
+	
+	struct AbilityInfo: Codable {
+		let ability: Ability
+		
+		struct Ability: Codable {
+			let name: String
+		}
+	}
+	
+	struct TypeInfo: Codable {
+		let type: TypieType
+		
+		struct TypieType: Codable {
+			let name: String
+		}
+	}
 }
 
 
-//struct Abilities: Codable {
-//	let abilities: [Ability]
-//}
-//
-//struct Species: Codable {
-//	let name: String
-//}
-//
-//struct Ability: Codable {
-//	let name: String
-//}
+
 //
 //struct Types: Codable {
 //	let types: [Type]
@@ -40,3 +46,8 @@ struct Pokemon: Codable {
 //struct PokemonSearch: Decodable {
 //	let results: [Pokemon]
 //}
+//
+//struct Species: Codable {
+//	let name: String
+//}
+//

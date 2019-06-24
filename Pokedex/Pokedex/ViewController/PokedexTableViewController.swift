@@ -11,15 +11,22 @@ import UIKit
 class PokedexTableViewController: UITableViewController {
 
 	let apiController = APIController()
-	var pokemonCollection: [Pokemon] = [] {
+	
+	var pokemon: Pokemon! {
 		didSet {
 			tableView.reloadData()
 		}
 	}
 	
+//	var pokemonCollection: [Pokemon] = [] {
+//		didSet {
+//			tableView.reloadData()
+//		}
+//	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -27,14 +34,14 @@ class PokedexTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return pokemonCollection.count
+        return apiController.pokemon.count
     }
 
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell", for: indexPath)
 
-        let pokemonCharacter = pokemonCollection[indexPath.row]
+        let pokemonCharacter = apiController.pokemon[indexPath.row]
 		cell.textLabel?.text = pokemonCharacter.name
 
         return cell
@@ -49,12 +56,11 @@ class PokedexTableViewController: UITableViewController {
 				let indexPath = tableView.indexPathForSelectedRow {
 					detailVC.searchBar.isHidden = true
 					detailVC.saveButton.style = .done
-					detailVC.pokemon = pokemonCollection[indexPath.row]
-			} else if segue.identifier == "SearchPokemonSegue" {
-				if let searchVC = segue.destination as? SearchDetailViewController {
-					
-					searchVC.apiController = apiController
-				}
+					detailVC.pokemon = apiController.pokemon[indexPath.row]
+			}
+		} else if segue.identifier == "SearchPokemonSegue" {
+			if let searchVC = segue.destination as? SearchDetailViewController {
+				searchVC.apiController = apiController
 			}
 		}
     }

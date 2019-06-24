@@ -27,7 +27,7 @@ class APIController {
 	
 	// Fetch Pokemon
 	func fetchPokemon(pokemonName: String, completion: @escaping (Pokemon?, Error?) -> Void) {
-		let pokemonUrl = baseUrl?.appendingPathComponent(pokemonName)
+		let pokemonUrl = baseUrl?.appendingPathComponent(pokemonName.lowercased())
 		guard let pokeUrl = pokemonUrl else { return }
 		var request = URLRequest(url: pokeUrl)
 		request.httpMethod = HTTPMethod.get.rawValue
