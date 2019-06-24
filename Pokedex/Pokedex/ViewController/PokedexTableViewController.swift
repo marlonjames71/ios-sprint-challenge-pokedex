@@ -23,6 +23,10 @@ class PokedexTableViewController: UITableViewController {
 //			tableView.reloadData()
 //		}
 //	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tableView.reloadData()
+	}
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +58,8 @@ class PokedexTableViewController: UITableViewController {
 		if segue.identifier == "ShowPokemonDetailSegue" {
 			if let detailVC = segue.destination as? SearchDetailViewController,
 				let indexPath = tableView.indexPathForSelectedRow {
-					detailVC.searchBar.isHidden = true
-					detailVC.saveButton.style = .done
 					detailVC.pokemon = apiController.pokemon[indexPath.row]
+					detailVC.hideSearchStuff()
 			}
 		} else if segue.identifier == "SearchPokemonSegue" {
 			if let searchVC = segue.destination as? SearchDetailViewController {

@@ -14,6 +14,7 @@ struct Pokemon: Codable {
 	let types: [TypeInfo]
 	let abilities: [AbilityInfo]
 	let id: Int
+	let sprites: SpriteFront
 	
 	struct AbilityInfo: Codable {
 		let ability: Ability
@@ -28,6 +29,14 @@ struct Pokemon: Codable {
 		
 		struct TypieType: Codable {
 			let name: String
+		}
+	}
+	
+	struct SpriteFront: Codable {
+		let imageUrl: String
+		
+		enum CodingKeys: String, CodingKey {
+			case imageUrl = "front_default"
 		}
 	}
 }

@@ -32,6 +32,7 @@ class SearchDetailViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		updateViews()
 		searchBar.delegate = self
     }
 	
@@ -45,6 +46,12 @@ class SearchDetailViewController: UIViewController {
 	}
 	
 	
+	func hideSearchStuff() {
+		loadViewIfNeeded()
+		searchBar.isHidden = true
+		saveButton.style = .done
+	}
+	
 	func updateViews() {
 //		guard let apiController = self.apiController else { return }
 		guard isViewLoaded else { return }
@@ -52,14 +59,16 @@ class SearchDetailViewController: UIViewController {
 		pokemonNameLabel.text = pokemon?.name.capitalized
 		idLabel.text = "ID: \(pokemonObject.id)"
 		
-//		var types: [String]
-//		for type in pokemonObject.types.first...pokemonObject.types.last {
-//			types.append(type)
-//		}
+		var types: [String] = []
+		for typeInfo in pokemonObject.types {
+			types.append(typeInfo.type.name)
+		}
 		
-		typeLabel.text = "Type: \(pokemonObject.types[0].type.name)"
-		abilityLabel.text = "Abilities: \(pokemonObject.abilities)"
+		typeLabel.text = "Type: \(types.joined(separator: ", "))"
+		abilityLabel.text = "Abilities: \(pokemonObject.abilities[0].ability.name)"
 	}
+	
+
 
 }
 
@@ -76,6 +85,12 @@ extension SearchDetailViewController: UISearchBarDelegate {
 			}
 			DispatchQueue.main.async {
 				self.pokemon = pokemonObject
+			}
+		}
+		guard let pokemonImgUrl = pokemon?.sprites.imageUrl else { return }
+		apiController.fetchImage(at: pokemonImgUrl) { (pokemonImage) in
+			DispatchQueue.main.async {
+//				self.imageView.image = pokemonImage
 			}
 		}
 	}
